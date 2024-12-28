@@ -22,7 +22,7 @@ def main ():
     screen.fill(p.Color("white"))
     gs = ChessEngine.GameState()
     validMoves = gs.getValidMoves()
-    moveMade = False #flag variable for when a move is made
+    moveMade = False
 
     loadImages()#Load once, move images around
     running = True
@@ -31,7 +31,7 @@ def main ():
     while running:
         for e in p.event.get():
             if e.type == p.QUIT: #exit strategy
-                running = FALSE
+                running = False
                 #MouseFunctions
             elif e.type == p.MOUSEBUTTONDOWN:
                 location = p.mouse.get_pos()  #Where is the mouse
@@ -39,7 +39,7 @@ def main ():
                 row = location[1]//SQ_SIZE
                 if sqSelected == (row, col): #this clears the selection after a 2nd click on a square
                     sqSelected = ()
-                    Playerclicks = []
+                    playerClicks = [] 
                 else:
                     sqSelected = (row, col)
                     playerClicks.append(sqSelected)
@@ -49,9 +49,10 @@ def main ():
                     if move in validMoves:
                         gs.makeMove(move)
                         moveMade = True
-                    sqSelected = () #reset the click count
-                    playerClicks = []
-                #Key functions
+                        sqSelected = () #reset the click count
+                        playerClicks = []
+                    else:
+                        playerClicks =[sqSelected]
             elif e.type == p.KEYDOWN:
                 if e.key == p.K_z: #undo when keyboard z is pressed
                     gs.undoMove()
@@ -66,7 +67,7 @@ def main ():
 #Creates graphics on the Board
 def drawGameState(screen, gs):
     drawBoard(screen) #squares on the board
-    drawPieces(screen, gs. board)
+    drawPieces(screen, gs.board)
 
 def drawBoard(screen):
     colors = [p.Color("white"), p.Color("gray")]
