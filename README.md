@@ -1,4 +1,6 @@
 # Chess Game
+## IF you are reading this, beware of LLM Slop ahead. I used an old project to test Claude Code
+
 
 A complete chess game implementation using PyGame, with both local and online multiplayer support.
 
